@@ -92,4 +92,4 @@ This Terraform configuration sets up an AWS Knowledge Base with an S3 bucket for
        - `urls`: List of URLs to crawl (`list(string)`).  
        - `crawl_depth`: Maximum depth for crawling (`number`).  
        - `include_patterns`: Optional URL patterns to include (`list(string)`, default: `[]`).  
-       - `exclude_patterns`: Optional URL patterns to exclude (`list(string)`, default:
+       - `exclude_patterns`: Optional URL patterns to exclude (`list(string)`, default: `[]`). 
