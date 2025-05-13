@@ -6,7 +6,7 @@ resource "time_sleep" "aws_iam_role_policy_bedrock_kb" {
 }
 
 resource "aws_bedrockagent_knowledge_base" "my_kb" {
-  name        = "test-knowledge-base"
+  name        = var.kb_name
   description = "Knowledge base for your documents"
   role_arn = aws_iam_role.bedrock_kb_role.arn
 
@@ -34,7 +34,7 @@ resource "aws_bedrockagent_knowledge_base" "my_kb" {
 
 resource "aws_bedrockagent_data_source" "kb_data_source" {
   knowledge_base_id = aws_bedrockagent_knowledge_base.my_kb.id
-  name              = "${var.kb_name}DataSource"
+  name              = "${var.kb_name}-DataSource"
   data_source_configuration {
     type = "S3"
     s3_configuration {
@@ -72,6 +72,7 @@ resource "aws_bedrockagent_data_source" "webcrawler" {
           
         }
         inclusion_filters = length(each.value.include_patterns) > 0 ? each.value.include_patterns : null 
+        exclusion_filters = length(each.value.exclude_patterns) > 0 ? each.value.exclude_patterns : null 
       }
     }
   }

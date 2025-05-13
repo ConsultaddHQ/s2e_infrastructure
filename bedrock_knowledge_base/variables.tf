@@ -7,19 +7,19 @@ variable "region" {
 variable "kb_name" {
   description = "The knowledge base name."
   type        = string
-  default     = "test-hyperflex"
+  default     = "hyperflex-s2e"
 }
 
 variable "kb_s3_bucket_name_prefix" {
   description = "The name prefix of the S3 bucket for the data source of the knowledge base."
   type        = string
-  default     = "test-bedrock-knowledge-base-hpf"
+  default     = "bedrock-knowledge-base-hf"
 }
 
 variable "kb_oss_collection_name" {
   description = "The name of the OSS collection for the knowledge base."
   type        = string
-  default     = "bedrock-knowledge-base-test"
+  default     = "bedrock-knowledge-base-hf"
 }
 
 variable "webcrawlers" {
@@ -36,12 +36,19 @@ variable "webcrawlers" {
       urls            = ["https://www.elastic.co/guide/en/ecs/current/", "https://www.elastic.co/guide/en/ecs/current/"]
       crawl_depth     = 2
     }
-
-    test = {
-      urls            = ["https://www.elastic.co/guide/en/ecs/current/"]
-      crawl_depth     = 1
-      include_patterns = ["https://www.elastic.co/guide/en/ecs/current/*", "https://www.elastic.co/guide/en/current/*"]
-    }
   }
+  # Example
+  # webcrawlers = {
+  #   ecs_mapping = {
+  #     urls            = ["https://www.elastic.co/guide/en/ecs/current/", "https://www.elastic.co/guide/en/ecs/current/"]
+  #     crawl_depth     = 2
+  #   }
+  #   ecs_mapping_with_patterns = {
+  #     urls            = ["https://www.elastic.co/guide/en/ecs/current/", "https://www.elastic.co/guide/en/ecs/current/"]
+  #     crawl_depth     = 2
+  #     include_patterns = ["https://www.elastic.co/guide/en/ecs/current/*", "https://www.elastic.co/guide/en/current/*"]
+  #     exclude_patterns = ["https://www.elastic.co/guide/en/current/*"]
+  #   }
+  # }
 }
 
