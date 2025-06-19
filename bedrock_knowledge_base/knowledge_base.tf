@@ -6,7 +6,7 @@ resource "time_sleep" "aws_iam_role_policy_bedrock_mapping_kb" {
 }
 
 resource "aws_bedrockagent_knowledge_base" "mapping_kb" {
-  name        = var.kb_name
+  name        = "${var.kb_name}-mapping"
   description = "Knowledge base for mapping migration documents"
   role_arn    = aws_iam_role.bedrock_kb_role.arn
 

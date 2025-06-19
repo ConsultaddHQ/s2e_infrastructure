@@ -6,7 +6,7 @@ resource "time_sleep" "aws_iam_role_policy_bedrock_spl_to_esql_kb" {
 }
 
 resource "aws_bedrockagent_knowledge_base" "spl_to_esql_kb" {
-  name        = var.kb_name
+  name        = "${var.kb_name}-SPL-to-ESQL"
   description = "Knowledge base for spl to esql migration documents"
   role_arn    = aws_iam_role.bedrock_kb_role.arn
 
