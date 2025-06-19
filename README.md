@@ -100,5 +100,5 @@ This Terraform configuration sets up an AWS Knowledge Base with an S3 bucket for
   * Open the Bedrock console(model-access)
   * Find the model cohere.embed-english-v3 in the list (under the Cohere section)
   * Click “Manage model access”
-  * Check the box for cohere.embed-english-v3, and click “Save changes”
+  * Check the box for cohere.embed-english-v3 and Llama 3.3 70B Instruct, and click “Save changes”
   * After enabling, you can run terraform apply to complete provisioning
