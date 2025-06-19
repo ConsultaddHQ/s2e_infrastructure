@@ -1,13 +1,13 @@
 
 
-resource "time_sleep" "aws_iam_role_policy_bedrock_mapping_kb" {
+resource "time_sleep" "aws_iam_role_policy_bedrock_spl_to_esql_kb" {
   create_duration = "20s"
   depends_on      = [aws_iam_role_policy.bedrock_kb_policy_oss]
 }
 
-resource "aws_bedrockagent_knowledge_base" "mapping_kb" {
+resource "aws_bedrockagent_knowledge_base" "spl_to_esql_kb" {
   name        = var.kb_name
-  description = "Knowledge base for mapping migration documents"
+  description = "Knowledge base for spl to esql migration documents"
   role_arn    = aws_iam_role.bedrock_kb_role.arn
 
   knowledge_base_configuration {
@@ -32,8 +32,8 @@ resource "aws_bedrockagent_knowledge_base" "mapping_kb" {
 
 }
 
-resource "aws_bedrockagent_data_source" "kb_mapping_data_source" {
-  knowledge_base_id = aws_bedrockagent_knowledge_base.mapping_kb.id
+resource "aws_bedrockagent_data_source" "kb_spl_to_esql_data_source" {
+  knowledge_base_id = aws_bedrockagent_knowledge_base.spl_to_esql_kb.id
   name              = "${var.kb_name}-DataSource"
   data_source_configuration {
     type = "S3"
@@ -43,9 +43,9 @@ resource "aws_bedrockagent_data_source" "kb_mapping_data_source" {
   }
 }
 
-resource "aws_bedrockagent_data_source" "webcrawler_mapping" {
-  for_each          = var.webcrawler_mapping
-  knowledge_base_id = aws_bedrockagent_knowledge_base.mapping_kb.id
+resource "aws_bedrockagent_data_source" "webcrawlers_spl_to_esql" {
+  for_each          = var.webcrawlers_spl_to_esql
+  knowledge_base_id = aws_bedrockagent_knowledge_base.spl_to_esql_kb.id
   name              = "crawler-${each.key}"
   description       = "Web crawler for ${each.key}"
 
