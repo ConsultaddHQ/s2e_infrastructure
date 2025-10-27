@@ -22,19 +22,19 @@ variable "kb_oss_collection_name" {
   default     = "bedrock-knowledge-base-hf"
 }
 
-variable "webcrawlers" {
+variable "webcrawlers_spl_to_esql" {
   description = "Map of web crawler configs with multiple URLs"
   type = map(object({
-    urls            = list(string)
-    crawl_depth     = number
+    urls             = list(string)
+    crawl_depth      = number
     include_patterns = optional(list(string), [])
     exclude_patterns = optional(list(string), [])
   }))
 
   default = {
     ecs_mapping = {
-      urls            = ["https://www.elastic.co/guide/en/ecs/current/", "https://www.elastic.co/guide/en/ecs/current/"]
-      crawl_depth     = 2
+      urls        = ["https://www.elastic.co/guide/en/ecs/current/", "https://www.elastic.co/guide/en/ecs/current/"]
+      crawl_depth = 2
     }
   }
   # Example
@@ -52,3 +52,21 @@ variable "webcrawlers" {
   # }
 }
 
+variable "webcrawler_mapping" {
+  description = "Map of web crawler configs with multiple URLs"
+  type = map(object({
+    urls             = list(string)
+    crawl_depth      = number
+    include_patterns = optional(list(string), [])
+    exclude_patterns = optional(list(string), [])
+  }))
+
+  default = {
+    ecs_mapping = {
+      urls = ["https://www.elastic.co/guide/en/ecs/current/",
+        "http://elastic.co/guide/en/ecs/current/ecs-converting.html",
+      "https://www.elastic.co/docs/reference/ecs/migrating-to-ecs"]
+      crawl_depth = 3
+    }
+  }
+}

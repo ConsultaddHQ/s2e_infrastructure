@@ -93,3 +93,12 @@ This Terraform configuration sets up an AWS Knowledge Base with an S3 bucket for
        - `crawl_depth`: Maximum depth for crawling (`number`).  
        - `include_patterns`: Optional URL patterns to include (`list(string)`, default: `[]`).  
        - `exclude_patterns`: Optional URL patterns to exclude (`list(string)`, default: `[]`). 
+
+5. **Manual Setup: Enable Model Access in Bedrock (One-Time Step)**
+  Amazon Bedrock embedding models from third-party providers like Cohere require manual access approval via the AWS Console. This cannot be automated with Terraform or the AWS CLI due to policy restrictions.
+
+  * Open the Bedrock console(model-access)
+  * Find the model cohere.embed-english-v3 in the list (under the Cohere section)
+  * Click “Manage model access”
+  * Check the box for cohere.embed-english-v3 and Llama 3.3 70B Instruct, and click “Save changes”
+  * After enabling, you can run terraform apply to complete provisioning
